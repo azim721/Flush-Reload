@@ -16,6 +16,9 @@
 // more encryptions show features more clearly
 #define NUMBER_OF_ENCRYPTIONS (40000)
 
+// T-table address offsets
+#define OFFSET (0x1b9280)
+
 static const uint8_t sbox[256] = {
   //0     1    2      3     4    5     6     7      8    9     A      B    C     D     E     F
   0x63, 0x7c, 0x77, 0x7b, 0xf2, 0x6b, 0x6f, 0xc5, 0x30, 0x01, 0x67, 0x2b, 0xfe, 0xd7, 0xab, 0x76,
@@ -128,7 +131,7 @@ int main()
   srand(min_time);
   sum = 0;
   char* probe[] = { 
-    base + 0x1b9280, base + 0x1b9680, base + 0x1b9a80, base + 0x1b9e80
+    base + OFFSET, base + OFFSET + 0x400, base + OFFSET +0x800, base + OFFSET +0xC00
   };
 
   // encryptions for Te0
@@ -311,8 +314,8 @@ int main()
     roundWords[0] = tempWord1;
   }
 
-  for(int i=0; i>=3; i--) {
-    printf("%x ", roundWords[i]);
+  for(int i=0; i<=3; i++) {
+    printf("%08x ", roundWords[i]);
   }
 
   close(fd);
