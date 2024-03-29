@@ -11,12 +11,11 @@ follow the steps outlined below.
 ## OpenSSL Installation
 
 Trusted Versions of OpenSSL can be found at: https://www.openssl.org/source/old/. This attack will work for most
-versions, but the specific version I used was version openssl-1.1.0f. After downloading the OpenSSL source, go to
-the Downloads folder and unzip with:
+versions, but the specific version I used was version openssl-1.1.0f. After cloning the repo, go to the folder and unzip with:
 
     unzip openssl-1.1.0f.zip
 
-Now we need to configure OpenSSL to use its t-table c implementation as opposed to the assembly implementation default.
+Now we need to configure OpenSSL to use its t-table C implementation as opposed to the assembly implementation default.
 OpenSSL also needs to be configured with debug symbols and specified to use a shared object as opposed to an .a library.
 For the appropriate configuration, run:
 
@@ -27,7 +26,7 @@ For the selected version: 1.1.0f, this configuration will install OpenSSL in the
 that we allow for debug symbols (used to locate T-table locations), create a shared object, only use c implementations of aes
 (to use the t-tables), and to not use any hardware routines. To proceed with the install, run:
 
-    sudo make
+    sudo make -j`nproc`
     sudo make install_sw
 
 ## Finding Cache Hit/Miss Threshold
