@@ -311,8 +311,8 @@ int main()
     roundWords[0] = tempWord1;
   }
 
-  for(int i=3; i>=0; i--) {
-    printf("%x, ", roundWords[i]);
+  for(int i=0; i>=3; i--) {
+    printf("%x ", roundWords[i]);
   }
 
   close(fd);
