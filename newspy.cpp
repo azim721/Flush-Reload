@@ -317,6 +317,7 @@ int main()
   for(int i=0; i<=3; i++) {
     printf("%08x ", roundWords[i]);
   }
+  printf("\n");
 
   close(fd);
   munmap(base, map_size);
