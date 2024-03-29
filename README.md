@@ -36,6 +36,7 @@ This repo contains a calibration tool to automatically find the threshold for a 
 curteousy of https://github.com/IAIK/flush_flush. Simply compile and run the tool with:
 
     g++ calibration.c -o calibration
+    ./calibration
 
 This should output an appropriate benchmark for each individual machine. Edit the **newspy.cpp** file's **MIN_CACHE_MISS_CYCLES**
 constant to the number that was output.
@@ -66,5 +67,6 @@ appropriate version of OpenSSL. To do this, type in terminal:
 The command for compiling the newspy.c file is:
 
     g++ newspy.cpp -o newspy -I/usr/local/include/ssl -L/usr/local/lib -lcrypto
+    ./newspy
     
 The output should be equal to the key specified in the newspy.c file.
