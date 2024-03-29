@@ -45,7 +45,7 @@ constant to the number that was output.
 A flush-reload attack monitors cache lines. To monitor the correct cache lines, we must find the offset of addresses of the t-tables
 with respect to the **libcrypto.so** shared object. To find this, perform the following commands:
 
-    cd /usr/lib
+    cd /usr/local/lib
     readelf -a libcrypto.so > ~/aeslib.txt
     
 This will deconstruct the **libcrypto.so** file and allow us to find the appropriate address offsets. We will use vim to find the
