@@ -14,13 +14,13 @@ Trusted Versions of OpenSSL can be found at: https://www.openssl.org/source/old/
 versions, but the specific version I used was version openssl-1.1.0f. After downloading the OpenSSL source, go to
 the Downloads folder and unzip with:
 
-    tar -xvf openssl-1.1.0f.tar.gz
+    unzip openssl-1.1.0f.zip
 
 Now we need to configure OpenSSL to use its t-table c implementation as opposed to the assembly implementation default.
 OpenSSL also needs to be configured with debug symbols and specified to use a shared object as opposed to an .a library.
 For the appropriate configuration, run:
 
-    cd ~/Downloads/openssl-1.1.0f
+    cd openssl-1.1.0f
     ./config -d shared no-asm no-hw
     
 For the selected version: 1.1.0f, this configuration will install OpenSSL in the /usr/local/ directory. The configuration parameters specify
@@ -47,14 +47,14 @@ A flush-reload attack monitors cache lines. To monitor the correct cache lines, 
 with respect to the **libcrypto.so** shared object. To find this, perform the following commands:
 
     cd /usr/local/lib
-    readelf -a libcrypto.so > ~/aeslib.txt
+    readelf -a libcrypto.so > ~/MEST/aeslib.txt
     
 This will deconstruct the **libcrypto.so** file and allow us to find the appropriate address offsets. We will use vim to find the
 output quickly:
 
-    vi ~/aeslib.txt
+    vi ~/MEST/aeslib.txt
 
-Search for the t-tables by pressing '/' and typing 'Te0'. Take note of these offsets, and change the **probe** character array
+Search for the t-tables by pressing '/' and typing 'Te0'. Take note of these offsets, and change the **OFFSET** constant
 in **newspy.cpp** to the appropriate offsets for your specific machine.
 
 ## Compile and run the program
@@ -64,9 +64,9 @@ appropriate version of OpenSSL. To do this, type in terminal:
 
     export LD_LIBRARY_PATH=/usr/local/lib
 
-The command for compiling the newspy.c file is:
+The command for compiling the newspy.cpp file is:
 
     g++ newspy.cpp -o newspy -I/usr/local/include/ssl -L/usr/local/lib -lcrypto
     ./newspy
     
-The output should be equal to the key specified in the newspy.c file.
+The output should be equal to the key specified in the newspy.cpp file.
